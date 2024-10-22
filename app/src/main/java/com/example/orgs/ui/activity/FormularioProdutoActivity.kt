@@ -1,47 +1,30 @@
 package com.example.orgs.ui.activity
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.orgs.ui.activity.ui.theme.OrgsTheme
+import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import com.example.orgs.R
 
-class FormularioProdutoActivity : ComponentActivity() {
+
+class FormularioProdutoActivity :
+    AppCompatActivity(R.layout.activity_formulario_produto) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            OrgsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+        val botaoSalvar = findViewById<Button>(R.id.botao_salvar)
+        botaoSalvar.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+
+                val campoNome = findViewById<EditText>(R.id.nome)
+                val nome = campoNome.text.toString()
+                Log.i("FormularioProduto", "onCreate: $nome")
             }
-        }
+        })
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OrgsTheme {
-        Greeting("Android")
-    }
-}
